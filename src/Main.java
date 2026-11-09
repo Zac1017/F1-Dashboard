@@ -3,6 +3,9 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Main {
 
@@ -20,21 +23,30 @@ public class Main {
                 .GET()
                 .build();
 
+        
+
         HttpResponse<String> response = client.send(
                 request,
                 HttpResponse.BodyHandlers.ofString()
         );
-        
-        CarData carData = new CarData(response.body());
 
-        System.out.println("Driver Number: " + carData.getDriverNumber());
-        System.out.println("Session Key: " + carData.getSessionKey());
-        System.out.println("Speed: " + carData.getSpeed());
-        System.out.println("Throttle: " + carData.getThrottle());
-        System.out.println("RPM: " + carData.getRpm());
-        System.out.println("Gear: " + carData.getGear());
-        System.out.println("DRS: " + carData.getDrs());
-        System.out.println("Date: " + carData.getDate());
-        System.out.println("Brake: " + carData.isBrake());
+        List<CarData> telemetry = new ArrayList<>();
+        Pattern pattern = Pattern.compile("\\{[^{}]*\\}");
+        Matcher matcher = pattern.matcher(response.body());
+
+        while (matcher.find()) {
+            telemetry.add(new CarData(matcher.group()));
+        }
+        
+        for (CarData car : telemetry) {
+            System.out.println(
+                car.getDriverNumber() + " | " +
+                car.getSpeed() + " km/h | " +
+                car.getRpm() + " rpm | " + 
+                car.getGear() + " gear | " +
+                car.getThrottle() + " % throttle | " +
+                car.getBrake() + " % brake"
+                );
+        }
     }
 }

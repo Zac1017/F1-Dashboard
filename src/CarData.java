@@ -59,7 +59,7 @@ public class CarData {
         return date;
     }
 
-    public int isBrake() {
+    public int getBrake() {
         return brake;
     }
 
