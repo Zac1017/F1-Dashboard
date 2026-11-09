@@ -28,5 +28,13 @@ public class Main {
         CarData carData = new CarData(response.body());
 
         System.out.println("Driver Number: " + carData.getDriverNumber());
+        System.out.println("Session Key: " + carData.getSessionKey());
+        System.out.println("Speed: " + carData.getSpeed());
+        System.out.println("Throttle: " + carData.getThrottle());
+        System.out.println("RPM: " + carData.getRpm());
+        System.out.println("Gear: " + carData.getGear());
+        System.out.println("DRS: " + carData.getDrs());
+        System.out.println("Date: " + carData.getDate());
+        System.out.println("Brake: " + carData.isBrake());
     }
 }
