@@ -7,7 +7,7 @@ public class CarData {
     private int gear;
     private int drs;
     private String date;
-    private boolean brake;
+    private int brake;
 
     public CarData(String json) {
         this.driver_number = getValue(json, "driver_number");
@@ -18,7 +18,7 @@ public class CarData {
         this.gear = Integer.parseInt(getValue(json, "n_gear"));
         this.drs = Integer.parseInt(getValue(json, "drs"));
         this.date = getValue(json, "date");
-        this.brake = Integer.parseInt(getValue(json, "brake")) == 100 ? true : false;
+        this.brake = Integer.parseInt(getValue(json, "brake"));
     }
     public static String getValue(String json, String key) {
         return json.split("\"" + key + "\":")[1]
@@ -59,7 +59,7 @@ public class CarData {
         return date;
     }
 
-    public boolean isBrake() {
+    public int isBrake() {
         return brake;
     }
 
