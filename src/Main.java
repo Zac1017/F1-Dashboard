@@ -24,8 +24,9 @@ public class Main {
                 request,
                 HttpResponse.BodyHandlers.ofString()
         );
+        
+        CarData carData = new CarData(response.body());
 
-        System.out.println("Status: " + response.statusCode());
-        System.out.println(response.body());
+        System.out.println("Driver Number: " + carData.getDriverNumber());
     }
 }
