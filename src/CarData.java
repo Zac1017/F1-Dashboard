@@ -1,5 +1,3 @@
-import java.net.http.HttpResponse;
-
 public class CarData {
     private String driver_number;
     private String session_key;
